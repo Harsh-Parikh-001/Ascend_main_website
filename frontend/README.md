@@ -1,13 +1,5 @@
-# Ascend frontend
+# Ascend Trade Commercial Frontend
 
-Minimal React and TypeScript development scaffold powered by Vite.
+React and TypeScript implementation of the Ascend Trade Commercial landing page. GSAP controls scroll-led storytelling and route animation; Motion controls navigation and interface feedback.
 
-From this directory, start the frontend with:
-
-```powershell
-npm.cmd run dev
-```
-
-The status screen checks the backend at `http://localhost:8000/api/health`.
-Set `VITE_API_BASE_URL` later if the backend address changes.
-
+Run `npm run dev` for local development, `npm run build` for a production build, `npm run lint` for static checks, and `npm run test:e2e` for the Playwright interaction suite.

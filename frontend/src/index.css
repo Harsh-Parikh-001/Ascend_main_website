@@ -1,13 +1,19 @@
+@import '@fontsource-variable/inter-tight';
 @import './styles/tokens.css';
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
 
 * {
   box-sizing: border-box;
 }
 
 :root {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  color: var(--color-pearl);
-  background: var(--color-blue-whale);
+  font-family: var(--font-body);
+  color: var(--color-blue-whale);
+  background: var(--color-pearl);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,6 +24,8 @@ body {
   min-width: 20rem;
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
+  background: var(--color-pearl);
 }
 
 button,
@@ -26,3 +34,27 @@ textarea {
   font: inherit;
 }
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: var(--color-blue-whale);
+  background: var(--color-dandelion);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-dandelion);
+  outline-offset: 4px;
+}

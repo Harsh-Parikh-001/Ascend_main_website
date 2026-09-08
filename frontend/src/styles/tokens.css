@@ -2,5 +2,16 @@
   --color-blue-whale: #11384f;
   --color-pearl: #e6ddce;
   --color-dandelion: #f3c129;
+  --color-ink: #0a1d27;
+  --color-white: #fffdf8;
+  --color-blue-muted: #31576c;
+  --color-line: rgb(17 56 79 / 18%);
+  --font-display: 'Inter Tight Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Inter Tight Variable', Arial, sans-serif;
+  --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --section-space: clamp(6rem, 12vw, 11rem);
+  --radius-sm: 0.75rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 2.75rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
-
