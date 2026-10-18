@@ -7,6 +7,11 @@ import logoColor from './assets/brand/logo-color.png'
 import logoMark from './assets/brand/logo-mark.png'
 import portAerial from './assets/brand/port-aerial.jpg'
 import truckImage from './assets/brand/ascend-truck.jpg'
+import customManufacturingImage from './assets/industry/custom-manufacturing.jpg'
+import industrialMachineryImage from './assets/industry/industrial-machinery.jpg'
+import solarImage from './assets/industry/solar-renewables.jpg'
+import chemicalsImage from './assets/industry/chemicals-materials.jpg'
+import worldMap from './assets/maps/world-robinson.svg'
 import { ContactForm } from './components/ContactForm'
 import { Header } from './components/Header'
 import { ArrowIcon, RouteArrow } from './components/Icons'
@@ -14,6 +19,15 @@ import { capabilities, industries, navItems, processSteps, promises } from './co
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
+
+const industryImages: Record<string, { src: string; alt: string }> = {
+  'image-port': { src: portAerial, alt: 'Shipping containers at a global port' },
+  'image-truck': { src: truckImage, alt: 'Freight truck on a highway' },
+  'image-machinery': { src: industrialMachineryImage, alt: 'Automated machinery operating on a factory production line' },
+  'image-custom': { src: customManufacturingImage, alt: 'Precision moulds and tooling inside a manufacturing workshop' },
+  'image-solar': { src: solarImage, alt: 'Rows of photovoltaic solar panels in a solar farm' },
+  'image-chemicals': { src: chemicalsImage, alt: 'Chemical samples in laboratory flasks and test tubes' },
+}
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null)
@@ -78,7 +92,7 @@ function App() {
       })
 
       const matchMedia = gsap.matchMedia()
-      matchMedia.add('(min-width: 768px)', () => {
+      matchMedia.add('(min-width: 1025px)', () => {
         const track = document.querySelector<HTMLElement>('.process-track')
         if (!track) return
 
@@ -87,8 +101,9 @@ function App() {
           scrollTrigger: {
             trigger: '#process',
             start: 'top top',
-            end: () => `+=${distance() + window.innerHeight * 2.2}`,
-            scrub: 0.7,
+            // Keep the full card travel, with less vertical scrolling and catch-up lag.
+            end: () => `+=${distance() + window.innerHeight * 0.8}`,
+            scrub: 0.25,
             pin: '.process-sticky',
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -106,7 +121,8 @@ function App() {
   )
 
   const scrollIndustries = (direction: 1 | -1) => {
-    industryRailRef.current?.scrollBy({ left: direction * 440, behavior: 'smooth' })
+    if (!industryRailRef.current) return
+    industryRailRef.current.scrollBy({ left: direction * industryRailRef.current.clientWidth, behavior: 'smooth' })
   }
 
   return (
@@ -194,15 +210,13 @@ function App() {
             {capabilities.map((capability, index) => {
               const active = activeCapability === index
               return (
-                <motion.button
+                <button
                   type="button"
                   key={capability.number}
                   className={`capability-panel ${active ? 'capability-panel--active' : ''}`}
                   onMouseEnter={() => setActiveCapability(index)}
                   onFocus={() => setActiveCapability(index)}
                   onClick={() => setActiveCapability(index)}
-                  layout
-                  transition={{ layout: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
                   aria-pressed={active}
                 >
                   <span className="capability-number">{capability.number}</span>
@@ -217,7 +231,7 @@ function App() {
                     )}
                   </AnimatePresence>
                   <span className="capability-icon"><ArrowIcon /></span>
-                </motion.button>
+                </button>
               )
             })}
           </div>
@@ -273,17 +287,20 @@ function App() {
           </div>
 
           <div className="industry-rail" ref={industryRailRef} data-reveal>
-            {industries.map((industry) => (
-              <motion.article className="industry-card" key={industry.name} whileHover={{ y: -8 }} transition={{ duration: 0.3 }}>
-                <div className={`industry-art ${industry.tone}`}>
-                  {industry.tone === 'image-port' && <img src={portAerial} alt="Shipping containers at a global port" />}
-                  {industry.tone === 'image-truck' && <img src={truckImage} alt="Freight truck on a highway" />}
-                  {!industry.tone.startsWith('image') && <div className="industry-diagram" aria-hidden="true"><span /><span /><span /><span /><span /></div>}
-                  <span className="industry-index">{industry.index}</span>
-                </div>
-                <div className="industry-card-copy"><h3>{industry.name}</h3><p>{industry.copy}</p></div>
-              </motion.article>
-            ))}
+            {industries.map((industry) => {
+              const image = industryImages[industry.tone]
+              return (
+                <motion.article className="industry-card" key={industry.name} whileHover={{ y: -8 }} transition={{ duration: 0.3 }}>
+                  <div className={`industry-art ${industry.tone} ${image ? 'industry-art--photo' : ''}`}>
+                    {image
+                      ? <img src={image.src} alt={image.alt} />
+                      : <div className="industry-diagram" aria-hidden="true"><span /><span /><span /><span /><span /></div>}
+                    <span className="industry-index">{industry.index}</span>
+                  </div>
+                  <div className="industry-card-copy"><h3>{industry.name}</h3><p>{industry.copy}</p></div>
+                </motion.article>
+              )
+            })}
           </div>
         </section>
 
@@ -297,22 +314,21 @@ function App() {
 
           <div className="network-map" data-reveal>
             <div className="network-grid" aria-hidden="true" />
-            <svg viewBox="0 0 800 600" role="img" aria-label="Trade network connecting India, China and global markets">
+            <img className="network-world-map" src={worldMap} alt="" aria-hidden="true" />
+            <svg className="network-routes" viewBox="0 0 1000 508" role="img" aria-label="Geographic world map showing trade routes from India to China, Europe and the Americas">
               <defs>
                 <filter id="route-glow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="5" result="blur" />
                   <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
                 </filter>
               </defs>
-              <path className="map-land" d="M90 164l57-41 64 3 35 45 69 18 48 46-14 46-62 5-22 66-60 7-27-42-52-5-28-55-46-30zm355 27 34-53 80-31 108 27 32 56-16 50-62 7-31 48-57-9-25-50-43-20zm108 194 38-34 73 8 44 55-21 55-68 17-61-30-15-49z" />
-              <path className="network-route network-route--main" pathLength="1" d="M312 350 C365 294 397 233 505 218" />
-              <path className="network-route" pathLength="1" d="M312 350 C218 308 183 233 145 188" />
-              <path className="network-route network-route--future" pathLength="1" d="M505 218 C618 240 661 342 628 408" />
-              <path className="network-route network-route--future" pathLength="1" d="M312 350 C363 458 470 478 628 408" />
-              <g className="map-pin map-pin--india"><circle cx="312" cy="350" r="10" /><circle cx="312" cy="350" r="22" /><text x="287" y="392">INDIA</text></g>
-              <g className="map-pin map-pin--china"><circle cx="505" cy="218" r="10" /><circle cx="505" cy="218" r="22" /><text x="475" y="260">CHINA</text></g>
-              <g className="map-pin"><circle cx="145" cy="188" r="7" /><text x="100" y="160">EUROPE</text></g>
-              <g className="map-pin"><circle cx="628" cy="408" r="7" /><text x="592" y="450">WORLD</text></g>
+              <path className="network-route network-route--main" pathLength="1" d="M710 195 C730 166 751 151 779 153" />
+              <path className="network-route network-route--future" pathLength="1" d="M710 195 C660 126 603 108 531 119" />
+              <path className="network-route network-route--future" pathLength="1" d="M710 195 C566 262 410 247 262 157" />
+              <g className="map-pin map-pin--india"><circle cx="710" cy="195" r="8" /><circle cx="710" cy="195" r="18" /><text x="690" y="226">INDIA</text></g>
+              <g className="map-pin map-pin--china"><circle cx="779" cy="153" r="8" /><circle cx="779" cy="153" r="18" /><text x="754" y="132">CHINA</text></g>
+              <g className="map-pin"><circle cx="531" cy="119" r="6" /><text x="503" y="96">EUROPE</text></g>
+              <g className="map-pin"><circle cx="262" cy="157" r="6" /><text x="223" y="136">AMERICAS</text></g>
             </svg>
             <div className="network-map-caption"><span>IN</span><RouteArrow /><span>CN</span><RouteArrow /><span>GL</span></div>
           </div>

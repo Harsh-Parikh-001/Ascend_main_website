@@ -32,22 +32,20 @@ export const capabilities = [
 
 export const processSteps = [
   { number: '01', title: 'Requirement', copy: 'We turn your commercial need into a clear sourcing and production brief.' },
-  { number: '02', title: 'Supplier discovery', copy: 'Suitable manufacturing partners are identified against your category and specification.' },
-  { number: '03', title: 'Verification', copy: 'Factory capability, compliance and track record are reviewed before the first quote.' },
-  { number: '04', title: 'Production', copy: 'Sampling, product development and production timelines are actively coordinated.' },
-  { number: '05', title: 'Quality inspection', copy: 'Quality is checked against the approved specification before goods move forward.' },
-  { number: '06', title: 'Logistics', copy: 'Packaging, documentation and shipment movement are brought into one managed flow.' },
-  { number: '07', title: 'Customs', copy: 'Customs coordination keeps the handover between borders clear and organized.' },
-  { number: '08', title: 'Delivery', copy: 'The journey closes at your warehouse door, with visibility maintained to the end.' },
+  { number: '02', title: 'Supplier discovery', copy: 'We search, compare and shortlist manufacturing partners against your exact category and specification.' },
+  { number: '03', title: 'Verify & sample', copy: 'Factory capability, compliance and samples are reviewed before a supplier is approved.' },
+  { number: '04', title: 'Produce & inspect', copy: 'Production timelines are coordinated and quality is checked against the approved specification.' },
+  { number: '05', title: 'Ship & clear', copy: 'Packaging, documentation, freight and customs move through one managed flow.' },
+  { number: '06', title: 'Deliver & scale', copy: 'Goods reach your warehouse with visibility intact, ready for the next order and greater scale.' },
 ]
 
 export const industries = [
   { index: '01', name: 'Hospitality & FF&E', copy: 'Furniture, fixtures, equipment and customized requirements for ambitious spaces.', tone: 'image-port' },
-  { index: '02', name: 'Industrial machinery', copy: 'Equipment sourcing shaped around technical requirements and production realities.', tone: 'graphic-machine' },
-  { index: '03', name: 'Solar & renewables', copy: 'Components and systems supporting the transition to cleaner infrastructure.', tone: 'graphic-solar' },
+  { index: '02', name: 'Industrial machinery', copy: 'Equipment sourcing shaped around technical requirements and production realities.', tone: 'image-machinery' },
+  { index: '03', name: 'Solar & renewables', copy: 'Components and systems supporting the transition to cleaner infrastructure.', tone: 'image-solar' },
   { index: '04', name: 'Construction & infrastructure', copy: 'Materials and manufactured inputs for projects designed to endure.', tone: 'image-truck' },
-  { index: '05', name: 'Chemicals & raw materials', copy: 'Commercial sourcing supported by supplier checks and clear documentation.', tone: 'graphic-material' },
-  { index: '06', name: 'Customized manufacturing', copy: 'From an early brief to repeatable production, built around what your business needs.', tone: 'graphic-custom' },
+  { index: '05', name: 'Chemicals & raw materials', copy: 'Commercial sourcing supported by supplier checks and clear documentation.', tone: 'image-chemicals' },
+  { index: '06', name: 'Customized manufacturing', copy: 'From an early brief to repeatable production, built around what your business needs.', tone: 'image-custom' },
 ]
 
 export const promises = [

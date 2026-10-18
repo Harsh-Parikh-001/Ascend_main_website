@@ -4,6 +4,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 * {
@@ -23,6 +25,7 @@ html {
 body {
   min-width: 20rem;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   overflow-x: hidden;
   background: var(--color-pearl);
@@ -32,6 +35,11 @@ button,
 input,
 textarea {
   font: inherit;
+}
+
+input,
+textarea {
+  font-size: 1rem;
 }
 
 button,
